@@ -32,11 +32,12 @@ the system's image library.
 
 Although the object is attached to the global scoped `navigator`, it is not available until after the `deviceready` event.
 
-    document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() {
-        console.log(navigator.camera);
-    }
-
+```js
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    console.log(navigator.camera);
+}
+```
 
 ## Installation
 
@@ -386,44 +387,50 @@ window.onorientationchange = function() {
 
 Take a photo and retrieve the image's file location:
 
-    navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-        destinationType: Camera.DestinationType.FILE_URI });
+```js
+navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+    destinationType: Camera.DestinationType.FILE_URI });
 
-    function onSuccess(imageURI) {
-        var image = document.getElementById('myImage');
-        image.src = imageURI;
-    }
+function onSuccess(imageURI) {
+    var image = document.getElementById('myImage');
+    image.src = imageURI;
+}
 
-    function onFail(message) {
-        alert('Failed because: ' + message);
-    }
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
+```
 
 Take a photo and retrieve it as a Base64-encoded image:
 
-    /**
-     * Warning: Using DATA_URL is not recommended! The DATA_URL destination
-     * type is very memory intensive, even with a low quality setting. Using it
-     * can result in out of memory errors and application crashes. Use FILE_URI
-     * or NATIVE_URI instead.
-     */
-    navigator.camera.getPicture(onSuccess, onFail, { quality: 25,
-        destinationType: Camera.DestinationType.DATA_URL
-    });
+```js
+/**
+ * Warning: Using DATA_URL is not recommended! The DATA_URL destination
+ * type is very memory intensive, even with a low quality setting. Using it
+ * can result in out of memory errors and application crashes. Use FILE_URI
+ * or NATIVE_URI instead.
+ */
+navigator.camera.getPicture(onSuccess, onFail, { quality: 25,
+    destinationType: Camera.DestinationType.DATA_URL
+});
 
-    function onSuccess(imageData) {
-        var image = document.getElementById('myImage');
-        image.src = "data:image/jpeg;base64," + imageData;
-    }
+function onSuccess(imageData) {
+    var image = document.getElementById('myImage');
+    image.src = "data:image/jpeg;base64," + imageData;
+}
 
-    function onFail(message) {
-        alert('Failed because: ' + message);
-    }
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
+```
 
 #### Preferences (iOS)
 
 -  __CameraUsesGeolocation__ (boolean, defaults to false). For capturing JPEGs, set to true to get geolocation data in the EXIF header. This will trigger a request for geolocation permissions if set to true.
 
-        <preference name="CameraUsesGeolocation" value="false" />
+```xml
+    <preference name="CameraUsesGeolocation" value="false" />
+```
 
 #### Amazon Fire OS Quirks <a name="camera-getPicture-quirks"></a>
 
@@ -457,9 +464,11 @@ can cause problems.  Wrap the alert within a `setTimeout()` to allow
 the iOS image picker or popover to fully close before the alert
 displays:
 
-    setTimeout(function() {
-        // do your thing here!
-    }, 0);
+```js
+setTimeout(function() {
+    // do your thing here!
+}, 0);
+```
 
 #### Windows Phone 7 Quirks
 
